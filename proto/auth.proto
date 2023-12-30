@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "auth_service/proto";
+
+import "google/protobuf/empty.proto";
+
+import "login.proto";
+import "register.proto";
+import "get_user_id.proto";
+
+service AuthenticationService {
+    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc Register(RegisterRequest) returns (google.protobuf.Empty);
+    rpc GetUserId(TokenRequest) returns (UserIdResponse);
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "auth_service/proto";
+
+message RegisterRequest {
+    string username = 1;
+    string email = 2;
+    string password = 3;
+}
