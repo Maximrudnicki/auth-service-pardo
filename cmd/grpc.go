@@ -89,7 +89,6 @@ func (s *GRPCServer) GetUserId(ctx context.Context, in *pb.TokenRequest) (*pb.Us
 	}
 
 	userId, err_id := strconv.Atoi(fmt.Sprint(user))
-	log.Printf("userId: %v\n", userId)
 
 	if err_id != nil {
 		log.Panicf("Failed to listen: %v\n", err_id)
