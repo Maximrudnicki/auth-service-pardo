@@ -4,7 +4,9 @@ import (
 	"auth_service/cmd/config"
 	"auth_service/cmd/model"
 	"auth_service/cmd/utils"
+	m "auth_service/cmd/utils/mails"
 	pb "auth_service/proto"
+
 	"context"
 	"fmt"
 	"log"
@@ -69,6 +71,11 @@ func (s *GRPCServer) Register(ctx context.Context, users *pb.RegisterRequest) (*
 			codes.AlreadyExists,
 			"Please use another email address",
 		)
+	}
+
+	greeting_err := m.SendGreeting(newUser.Email)
+	if greeting_err != nil {
+		log.Printf("greeting_err: %v", greeting_err)
 	}
 
 	return &emptypb.Empty{}, nil

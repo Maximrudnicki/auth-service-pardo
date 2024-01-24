@@ -27,7 +27,7 @@ func main() {
 
 	db_table_err := db.Table("users").AutoMigrate(&model.Users{})
 	if db_table_err != nil {
-		log.Fatalf("Databese table error: %v\n", db_table_err)
+		log.Fatalf("Database table error: %v\n", db_table_err)
 	}
 
 	//Init Repository
