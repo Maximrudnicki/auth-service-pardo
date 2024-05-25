@@ -98,10 +98,22 @@ func (s *GRPCServer) GetUserId(ctx context.Context, in *pb.TokenRequest) (*pb.Us
 	userId, err_id := strconv.Atoi(fmt.Sprint(user))
 
 	if err_id != nil {
-		log.Panicf("Failed to listen: %v\n", err_id)
+		log.Printf("Failed to listen: %v\n", err_id)
 	}
 
 	return &pb.UserIdResponse{
 		UserId: uint32(userId),
+	}, nil
+}
+
+func (s *GRPCServer) FindUser(ctx context.Context, in *pb.FindUserRequest) (*pb.UserResponse, error) {
+	user, err := s.UsersRepository.FindById(int(in.StudentId))
+	if err != nil {
+		log.Printf("find user error: %v\n", err)
+	}
+
+	return &pb.UserResponse{
+		Email: user.Email,
+		Username: user.Username,	
 	}, nil
 }

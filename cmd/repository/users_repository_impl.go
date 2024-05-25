@@ -35,13 +35,13 @@ func (u *UsersRepositoryImpl) FindAll() []model.Users {
 }
 
 // FindById implements UsersRepository
-func (u *UsersRepositoryImpl) FindById(usersId int) (model.Users, error) {
-	var users model.Users
-	result := u.Db.Find(&users, usersId)
+func (u *UsersRepositoryImpl) FindById(userId int) (model.Users, error) {
+	var user model.Users
+	result := u.Db.Find(&user, userId)
 	if result != nil {
-		return users, nil
+		return user, nil
 	} else {
-		return users, errors.New("users is not found")
+		return user, errors.New("users is not found")
 	}
 }
 
@@ -49,7 +49,7 @@ func (u *UsersRepositoryImpl) FindById(usersId int) (model.Users, error) {
 func (u *UsersRepositoryImpl) Save(user model.Users) error {
 	result := u.Db.Create(&user)
 	if result.Error != nil {
-		return errors.New("Please use different email")
+		return errors.New("please use different email")
 	}
 	return nil
 }

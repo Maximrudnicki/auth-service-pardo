@@ -9,9 +9,11 @@ import "google/protobuf/empty.proto";
 import "login.proto";
 import "register.proto";
 import "get_user_id.proto";
+import "find_user.proto";
 
 service AuthenticationService {
     rpc Login(LoginRequest) returns (LoginResponse);
     rpc Register(RegisterRequest) returns (google.protobuf.Empty);
     rpc GetUserId(TokenRequest) returns (UserIdResponse);
+    rpc FindUser(FindUserRequest) returns (UserResponse);
 }
