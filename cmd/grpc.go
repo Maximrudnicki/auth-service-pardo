@@ -107,7 +107,7 @@ func (s *GRPCServer) GetUserId(ctx context.Context, in *pb.TokenRequest) (*pb.Us
 }
 
 func (s *GRPCServer) FindUser(ctx context.Context, in *pb.FindUserRequest) (*pb.UserResponse, error) {
-	user, err := s.UsersRepository.FindById(int(in.StudentId))
+	user, err := s.UsersRepository.FindById(int(in.UserId))
 	if err != nil {
 		log.Printf("find user error: %v\n", err)
 	}
