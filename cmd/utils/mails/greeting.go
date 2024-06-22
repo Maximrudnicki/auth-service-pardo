@@ -9,7 +9,7 @@ import (
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
-func SendGreeting(email string) error {
+func SendGreeting(email string, name string) error {
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	if err != nil {
 		log.Printf("Failed to connect to RabbitMQ: %v", err)
@@ -43,7 +43,7 @@ func SendGreeting(email string) error {
 	emailData := EmailData{
 		To:      []string{email},
 		Subject: "Welcome aboard!",
-		Name:    "Maxim",
+		Name:    name,
 	}
 	body, err := json.Marshal(emailData)
 	if err != nil {

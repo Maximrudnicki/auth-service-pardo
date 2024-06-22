@@ -73,7 +73,7 @@ func (s *GRPCServer) Register(ctx context.Context, users *pb.RegisterRequest) (*
 		)
 	}
 
-	greeting_err := m.SendGreeting(newUser.Email)
+	greeting_err := m.SendGreeting(newUser.Email, newUser.Username)
 	if greeting_err != nil {
 		log.Printf("greeting_err: %v", greeting_err)
 	}

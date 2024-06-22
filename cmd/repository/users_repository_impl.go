@@ -15,6 +15,15 @@ func NewUsersRepositoryImpl(Db *gorm.DB) UsersRepository {
 	return &UsersRepositoryImpl{Db: Db}
 }
 
+// Save implements UsersRepository
+func (u *UsersRepositoryImpl) Save(user model.Users) error {
+	result := u.Db.Create(&user)
+	if result.Error != nil {
+		return errors.New("please use different email")
+	}
+	return nil
+}
+
 // Delete implements UsersRepository
 func (u *UsersRepositoryImpl) Delete(usersId int) {
 	var users model.Users
@@ -44,29 +53,6 @@ func (u *UsersRepositoryImpl) FindById(userId int) (model.Users, error) {
 		return user, errors.New("users is not found")
 	}
 }
-
-// Save implements UsersRepository
-func (u *UsersRepositoryImpl) Save(user model.Users) error {
-	result := u.Db.Create(&user)
-	if result.Error != nil {
-		return errors.New("please use different email")
-	}
-	return nil
-}
-
-// Update implements UsersRepository
-// func (u *UsersRepositoryImpl) Update(users model.Users) {
-// 	var updateUsers = request.UpdateUsersRequest{
-// 		Id:       users.Id,
-// 		Username: users.Username,
-// 		Email:    users.Email,
-// 		Password: users.Password,
-// 	}
-// 	result := u.Db.Model(&users).Updates(updateUsers)
-// 	if result.Error != nil {
-// 		panic(result.Error)
-// 	}
-// }
 
 // FindByUsername implements UsersRepository
 func (u *UsersRepositoryImpl) FindByEmail(email string) (model.Users, error) {
